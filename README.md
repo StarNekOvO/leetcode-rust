@@ -1,62 +1,73 @@
-# leetcode-rust
+# LeetCode Rust
 
 用 Rust 刷 LeetCode 的个人项目
 
 ## 项目结构
 
-每个题目一个 rs 文件，直接在主函数中写测试用例。
+每个题目放在 `examples/` 目录下，可以独立运行。
 
 ```
-src/
-├── main.rs              # 入口文件（可选）
-├── two_sum.rs          # 题目示例：两数之和
-├── problem_xxx.rs      # 你的题目...
+examples/
+├── p0001_two_sum.rs    # 题目 1：两数之和
+├── p0002_add_two_numbers.rs  # 题目 2
 └── ...
 ```
 
-## 运行方式
+## 使用方法
 
-### 运行主函数测试
+### 运行题目
 
-```bash
-# 运行示例题目
-cargo run --bin two_sum
-
-# 或者直接运行某个文件的主函数
-rustc --edition 2021 src/two_sum.rs && ./two_sum
-```
-
-### 运行单元测试
-
-如果你想运行项目中的单元测试：
+根据你把测试用例写在哪，选择不同的命令：
 
 ```bash
-cargo test
+# 如果测试用例写在 main() 函数里 → 用 run
+cargo run --example p0001_two_sum
+
+# 如果测试用例写在 #[test] 标记的函数里 → 用 test
+cargo test --example p0001_two_sum
 ```
 
-## 解题规范
+**区别：**
+- `cargo run` → 执行 `main()` 函数里的手动调试代码
+- `cargo test` → 执行所有 `#[test]` 标记的自动化测试
 
-每个题目的文件应包含：
-1. 题目描述（注释）
-2. 解题函数
-3. 主函数包含测试用例
-4. （可选）单元测试
+### 添加新题目
 
-示例：
+1. 在 `examples/` 目录创建新文件 `p0XXX_xxx.rs`
+2. 复制模板，按格式填写题目描述
+3. 实现解题函数和测试用例
+4. 可直接运行 `cargo run --example p0XXX_xxx`
+
+## 解题模板
+
 ```rust
-/// LeetCode #X: 题目名称
+/// # 题目编号. 题目名称
+/// 
+/// 题目描述...
+///
+/// ## 示例 1：
+/// ```
+/// 输入：...
+/// 输出：...
+/// ```
 
-pub fn solution(/* ... */) {
-    // your solution
+// 实现函数
+pub fn solution(/* 参数 */) {
+    // TODO: 你的实现
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_case_1() {
+        // TODO: 测试用例 1
+    }
 }
 
 fn main() {
-    // 测试用例 1
-    println!("测试用例 1:");
-    // ...
-    
-    // 测试用例 2
-    println!("测试用例 2:");
-    // ...
+    // TODO: 测试用例
+    println!("结果: ");
 }
 ```
